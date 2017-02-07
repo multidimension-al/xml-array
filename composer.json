@@ -1,0 +1,25 @@
+{
+    "name": "multidimensional/xml-array",
+    "description": "Create a an Array from a XML file.",
+    "authors": [{
+        "name": "multidimension.al",
+        "homepage": "https://multidimension.al",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": ">=5.5",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Multidimensional\\XmlArray\\": "lib"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Multidimensional\\XmlArray\\Test": "tests"
+        }
+    }
+}
