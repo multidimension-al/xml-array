@@ -37,18 +37,18 @@ class XMLArrayTest extends TestCase
         $expected = array ('firstname' => 'Test', 'lastname' => 'Man', 'address' => array ('street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA',),);
         $this->assertEquals($result, $expected);
     }
-	
-	public function testFalse()
-	{
-		$string = ''; 
+    
+    public function testFalse()
+    {
+        $string = ''; 
         $result = (new XMLArray)->generateArray($string);
         $this->assertFalse($result);
-	}
-	
-	public function testNull()
-	{
-		$string = null; 
+    }
+    
+    public function testNull()
+    {
+        $string = null; 
         $result = (new XMLArray)->generateArray($string);
-        $this->assertFalse($result);	
-	}
+        $this->assertFalse($result);    
+    }
 }

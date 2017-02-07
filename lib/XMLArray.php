@@ -17,7 +17,7 @@
 namespace Multidimensional\XmlArray;
 
 class XMLArray {
-    	
+        
     /**
      * @param string $xml
      * @return array
