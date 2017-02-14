@@ -26,7 +26,7 @@ class XMLArray {
      * @param string $xml
      * @return array
      */
-    public function generateArray(string $string)
+    public function generateArray($string)
     {        
         $xml = simplexml_load_string($string);
         $json = json_encode($xml);
