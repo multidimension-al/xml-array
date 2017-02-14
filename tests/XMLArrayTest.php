@@ -21,7 +21,7 @@
 namespace Multidimensional\XmlArray\Test;
 
 use Multidimensional\XmlArray;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 class XMLArrayTest extends TestCase
 {
