@@ -30,7 +30,7 @@ class XMLArray {
     {        
         $xml = simplexml_load_string($string);
         $json = json_encode($xml);
-		$array = (array) json_decode($json, TRUE);
+		$array = json_decode($json, TRUE);
 		$array = $this->convertAttributes($array);		
         return $array;
     }
@@ -39,14 +39,16 @@ class XMLArray {
 	 * @param array $array
 	 * @return array
 	 */
-	private function convertAttributes($array = [])
+	private function convertAttributes($array)
 	{
-		foreach ($array AS $key => $value) {
-			if(isset($value['@attributes'])) {
-				foreach ($value['@attributes'] AS $key2 => $value2) {
-					$array[$key]['@'.$key2] = $value2;	
+		if (is_array($array)) {
+			foreach ($array AS $key => $value) {
+				if(isset($value['@attributes'])) {
+					foreach ($value['@attributes'] AS $key2 => $value2) {
+						$array[$key]['@'.$key2] = $value2;	
+					}
+					unset($array[$key]['@attributes']);	
 				}
-				unset($array[$key]['@attributes']);	
 			}
 		}
 		
