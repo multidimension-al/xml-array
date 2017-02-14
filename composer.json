@@ -19,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Multidimensional\\XmlArray\\Test": "tests"
+            "Multidimensional\\XmlArray\\Test\\": "tests"
         }
     }
 }
