@@ -1,3 +1,10 @@
+# PhpStorm
+.idea/
+
+# Composer
+vendor/
+composer.lock
+
 # Dreamweaver
 _notes/
 
