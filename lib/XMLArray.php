@@ -28,12 +28,12 @@ class XMLArray
      * @param string $xml
      * @return array
      */
-    public function generateArray($string)
+    public static function generateArray($string)
     {
         $xml = simplexml_load_string($string);
         $json = json_encode($xml);
         $array = json_decode($json, true);
-        $array = $this->convertAttributes($array);
+        $array = self::convertAttributes($array);
         return $array;
     }
     
@@ -41,7 +41,7 @@ class XMLArray
      * @param array $array
      * @return array
      */
-    private function convertAttributes($array)
+    private static function convertAttributes($array)
     {
         if (is_array($array)) {
             foreach ($array as $key => $value) {
@@ -50,6 +50,8 @@ class XMLArray
                         $array[$key]['@'.$key2] = $value2;
                     }
                     unset($array[$key]['@attributes']);
+                } elseif (is_array($value)) {
+                    $array[$key] = self::convertAttributes($value);
                 }
             }
         }

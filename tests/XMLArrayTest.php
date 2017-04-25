@@ -30,38 +30,46 @@ class XMLArrayTest extends TestCase
     public function testSimple()
     {
         $string = '<simple>true</simple>';
-        $result = (new XMLArray)->generateArray($string);
-        $expected = array (0 => 'true',);
-        $this->assertEquals($result, $expected);
+        $result = XMLArray::generateArray($string);
+        $expected = [0 => 'true'];
+        $this->assertEquals($expected, $result);
     }
  
     public function testComplex()
     {
         $string = '<person><firstname>Test</firstname><lastname>Man</lastname><address><street>123 Fake St</street><city>Springfield</city><state>USA</state></address></person>';
-        $result = (new XMLArray)->generateArray($string);
-        $expected = array ('firstname' => 'Test', 'lastname' => 'Man', 'address' => array ('street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA',),);
-        $this->assertEquals($result, $expected);
+        $result = XMLArray::generateArray($string);
+        $expected = ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA']];
+        $this->assertEquals($expected, $result);
     }
     
     public function testAttributes()
     {
         $string = '<xml><person ID="1"><firstname>Test</firstname><lastname>Man</lastname><address><street>123 Fake St</street><city>Springfield</city><state>USA</state></address></person></xml>';
-        $result = (new XMLArray)->generateArray($string);
-        $expected = array('person' => array ('firstname' => 'Test', 'lastname' => 'Man', 'address' => array ('street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA',), '@ID' => '1'));
-        $this->assertEquals($result, $expected);
+        $result = XMLArray::generateArray($string);
+        $expected = ['person' => ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA'], '@ID' => '1']];
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testComplexWithAttributes()
+    {
+        $string = '<?xml version="1.0" encoding="UTF-8"?><xml><person ID="1"><name>John Smith</name></person><person ID="2"><name>Jane Smith</name></person></xml>';
+        $result = XMLArray::generateArray($string);
+        $expected = ['person' => [0 => ['@ID' => '1', 'name' => 'John Smith'], 1 => ['@ID' => '2', 'name' => 'Jane Smith']]];
+        $this->assertEquals($expected, $result);
     }
     
     public function testFalse()
     {
         $string = '';
-        $result = (new XMLArray)->generateArray($string);
+        $result = XMLArray::generateArray($string);
         $this->assertFalse($result);
     }
     
     public function testNull()
     {
         $string = null;
-        $result = (new XMLArray)->generateArray($string);
+        $result = XMLArray::generateArray($string);
         $this->assertFalse($result);
     }
 }
