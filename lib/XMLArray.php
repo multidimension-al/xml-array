@@ -23,21 +23,36 @@ namespace Multidimensional\XmlArray;
 
 class XMLArray
 {
-        
+
     /**
-     * @param string $xml
-     * @return array
+     * This function will generate a PHP array from a string containing well formed XML code. If the XML string cannot
+     * be loaded, it will return null. This function has an optional parameter to return @attributes reformatted, which
+     * is enabled by default.
+     *
+     * @param string|null $string
+     * @param bool $convertAttributes
+     * @return array|null
      */
-    public static function generateArray($string)
+    public static function generateArray($string, $convertAttributes = true)
     {
         $xml = simplexml_load_string($string);
-        $json = json_encode($xml);
-        $array = json_decode($json, true);
-        $array = self::convertAttributes($array);
-        return $array;
+        if ($xml !== false) {
+            $json = json_encode([$xml->getName() => $xml]);
+            $array = json_decode($json, true);
+            if ($convertAttributes === true) {
+                $array = self::convertAttributes($array);
+            }
+            return $array;
+        } else {
+            return null;
+        }
     }
     
     /**
+     * This private function will convert attributes from the standard @attributes array to an inline set of fields
+     * with the @ notation in front of each variable key. This function works recursively to find all @attributes in
+     * the entire supplied array.
+     *
      * @param array $array
      * @return array
      */

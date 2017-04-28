@@ -31,7 +31,7 @@ class XMLArrayTest extends TestCase
     {
         $string = '<simple>true</simple>';
         $result = XMLArray::generateArray($string);
-        $expected = [0 => 'true'];
+        $expected = ['simple' => [0 => 'true']];
         $this->assertEquals($expected, $result);
     }
  
@@ -39,15 +39,23 @@ class XMLArrayTest extends TestCase
     {
         $string = '<person><firstname>Test</firstname><lastname>Man</lastname><address><street>123 Fake St</street><city>Springfield</city><state>USA</state></address></person>';
         $result = XMLArray::generateArray($string);
-        $expected = ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA']];
+        $expected = ['person' => ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA']]];
         $this->assertEquals($expected, $result);
     }
-    
+
+    public function testStandardAttributes()
+    {
+        $string = '<xml><person ID="1"><firstname>Test</firstname><lastname>Man</lastname><address><street>123 Fake St</street><city>Springfield</city><state>USA</state></address></person></xml>';
+        $result = XMLArray::generateArray($string, false);
+        $expected = ['xml' => ['person' => ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA'], '@attributes' => ['ID' => '1']]]];
+        $this->assertEquals($expected, $result);
+    }
+
     public function testAttributes()
     {
         $string = '<xml><person ID="1"><firstname>Test</firstname><lastname>Man</lastname><address><street>123 Fake St</street><city>Springfield</city><state>USA</state></address></person></xml>';
         $result = XMLArray::generateArray($string);
-        $expected = ['person' => ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA'], '@ID' => '1']];
+        $expected = ['xml' => ['person' => ['firstname' => 'Test', 'lastname' => 'Man', 'address' => ['street' => '123 Fake St', 'city' => 'Springfield', 'state' => 'USA'], '@ID' => '1']]];
         $this->assertEquals($expected, $result);
     }
 
@@ -55,7 +63,7 @@ class XMLArrayTest extends TestCase
     {
         $string = '<?xml version="1.0" encoding="UTF-8"?><xml><person ID="1"><name>John Smith</name></person><person ID="2"><name>Jane Smith</name></person></xml>';
         $result = XMLArray::generateArray($string);
-        $expected = ['person' => [0 => ['@ID' => '1', 'name' => 'John Smith'], 1 => ['@ID' => '2', 'name' => 'Jane Smith']]];
+        $expected = ['xml' => ['person' => [0 => ['@ID' => '1', 'name' => 'John Smith'], 1 => ['@ID' => '2', 'name' => 'Jane Smith']]]];
         $this->assertEquals($expected, $result);
     }
     
@@ -63,13 +71,13 @@ class XMLArrayTest extends TestCase
     {
         $string = '';
         $result = XMLArray::generateArray($string);
-        $this->assertFalse($result);
+        $this->assertNull($result);
     }
     
     public function testNull()
     {
         $string = null;
         $result = XMLArray::generateArray($string);
-        $this->assertFalse($result);
+        $this->assertNull($result);
     }
 }
