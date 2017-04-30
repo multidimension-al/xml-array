@@ -65,8 +65,10 @@ class XMLArray
                         $array[$key]['@'.$key2] = $value2;
                     }
                     unset($array[$key]['@attributes']);
-                } elseif (is_array($value)) {
-                    $array[$key] = self::convertAttributes($value);
+                }
+
+                if (is_array($array[$key])) {
+                    $array[$key] = self::convertAttributes($array[$key]);
                 }
             }
         }

@@ -66,6 +66,14 @@ class XMLArrayTest extends TestCase
         $expected = ['xml' => ['person' => [0 => ['@ID' => '1', 'name' => 'John Smith'], 1 => ['@ID' => '2', 'name' => 'Jane Smith']]]];
         $this->assertEquals($expected, $result);
     }
+
+    public function testMoreComplexAttributes()
+    {
+        $string = '<?xml version="1.0" encoding="UTF-8"?><RateV4Response><Package ID="123"><ZipOrigination>20500</ZipOrigination><ZipDestination>90210</ZipDestination><Pounds>0</Pounds><Ounces>32</Ounces><Size>REGULAR</Size><Machinable>TRUE</Machinable><Zone>8</Zone><Postage CLASSID="1"><MailService>Priority Mail 2-Day&lt;sup&gt;&#8482;&lt;/sup&gt;</MailService><Rate>12.75</Rate></Postage><Postage CLASSID="22"><MailService>Priority Mail 2-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Large Flat Rate Box</MailService><Rate>18.85</Rate></Postage><Postage CLASSID="17"><MailService>Priority Mail 2-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Medium Flat Rate Box</MailService><Rate>13.60</Rate></Postage><Postage CLASSID="28"><MailService>Priority Mail 2-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Small Flat Rate Box</MailService><Rate>7.15</Rate></Postage></Package></RateV4Response>';
+        $result = XMLArray::generateArray($string);
+        $expected = ['RateV4Response' => ['Package' => ['@ID' => '123', 'ZipOrigination' => '20500', 'ZipDestination' => '90210', 'Pounds' => '0', 'Ounces' => '32', 'Size' => 'REGULAR', 'Machinable' => 'TRUE', 'Zone' => '8', 'Postage' => [0 => ['@CLASSID' => '1', 'MailService' => 'Priority Mail 2-Day<sup>™</sup>', 'Rate' => '12.75'], 1 => ['@CLASSID' => '22', 'MailService' => 'Priority Mail 2-Day<sup>™</sup> Large Flat Rate Box', 'Rate' => '18.85'], 2 => ['@CLASSID' => '17', 'MailService' => 'Priority Mail 2-Day<sup>™</sup> Medium Flat Rate Box', 'Rate' => '13.60'], 3 => ['@CLASSID' => '28', 'MailService' => 'Priority Mail 2-Day<sup>™</sup> Small Flat Rate Box', 'Rate' => '7.15']]]]];
+        $this->assertEquals($expected, $result);
+    }
     
     public function testFalse()
     {
