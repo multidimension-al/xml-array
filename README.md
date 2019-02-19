@@ -20,7 +20,7 @@ The easiest way to install this library is to use composer. To install, simply i
 
 ```
 "require": {
-    "php": ">=5.6",
+    "php": ">=5.5",
     "multidimensional/xml-array": "*"
 }
 ```
@@ -57,7 +57,7 @@ When set to false, the attributes will be placed in an array, typically marked b
 
 # Contributing
 
-We appreciate all help in improving this library by either adding functions to improving existing functionality. If you do want to add to our library, please ensure you use PSR-2 formatting and add unit testing for all added functions.
+We appreciate all help in improving this library by either adding functions or improving existing functionality. If you do want to add to our library, please ensure you use PSR-2 formatting and add unit testing for all added functions.
 
 Feel free to fork and submit a pull request!
 
