@@ -1,6 +1,7 @@
 {
     "name": "multidimensional/xml-array",
     "description": "Create an Array from a XML file.",
+    "license": "MIT",
     "authors": [{
         "name": "multidimension.al",
         "homepage": "https://multidimension.al",
