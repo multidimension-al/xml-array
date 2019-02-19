@@ -20,7 +20,6 @@ The easiest way to install this library is to use composer. To install, simply i
 
 ```
 "require": {
-    "php": ">=5.5",
     "multidimensional/xml-array": "*"
 }
 ```
