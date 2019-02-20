@@ -8,7 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/multidimensional/xml-array/d/total.svg)](https://packagist.org/packages/multidimensional/xml-array)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/multidimension-al/xml-array/badges/quality-score.png)](https://scrutinizer-ci.com/g/multidimension-al/xml-array/)
 
-This is a very simple and basic library that will create a PHP Array from a well formatted XML input. This library does the opposite of our [DOM-Array](https://github.com/multidimension-al/dom-array) library which converts an array into an XML file.
+This is a very simple and basic library that will create a PHP Array from a well formatted XML input. This library does the opposite of our [DOM-Array](https://github.com/multidimension-al/dom-array) library which converts an array into an XML file.__
 
 ## Requirements
 
@@ -53,6 +53,8 @@ print_r($array);
 By default, the library will convert attributes and will prepend ```@``` prior to the name of the attribute. You can disable the conversion of attributes by setting the 2nd parameter in ```generateArray``` to false.
 
 When set to false, the attributes will be placed in an array, typically marked by the value '@attributes'. 
+
+_Null_ or _Empty_ XML will return a null array.
 
 # Contributing
 
