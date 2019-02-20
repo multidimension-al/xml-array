@@ -8,7 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/multidimensional/xml-array/d/total.svg)](https://packagist.org/packages/multidimensional/xml-array)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/multidimension-al/xml-array/badges/quality-score.png)](https://scrutinizer-ci.com/g/multidimension-al/xml-array/)
 
-This is a very simple and basic library that will create a PHP Array from a well formatted XML input. This library does the opposite of our [DOM-Array](https://github.com/multidimension-al/dom-array) library which converts an array into an XML file.__
+This is a very simple and basic library that will create a PHP Array from a well formatted XML input. This library does the opposite of our [DOM-Array](https://github.com/multidimension-al/dom-array) library which converts an array into an XML file.
 
 ## Requirements
 
